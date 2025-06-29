@@ -657,40 +657,37 @@ const ShoppingApp: React.FC = () => {
                   </div>
 
                   {/* Price */}
-                  <div className="flex items-center justify-between">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                          ${product.price}
-                        </span>
-                        {product.originalPrice && (
-                          <span className="text-gray-500 line-through text-lg">
-                            ${product.originalPrice}
-                          </span>
-                        )}
-                      </div>
-                      {product.originalPrice && (
-                        <span className="text-green-400 text-sm font-semibold">
-                          Save ${(product.originalPrice - product.price).toFixed(2)}
-                        </span>
-                      )}
-                    </div>
-
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => addToCart(product)}
-                      disabled={!product.inStock}
-                      className={`px-6 py-3 rounded-xl font-semibold transition-all shadow-lg ${
-                        product.inStock
-                          ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 hover:shadow-purple-500/25'
-                          : 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                      }`}
-                    >
-                      Add to Cart
-                    </motion.button>
-                  </div>
+                <div className="flex flex-col items-center justify-center space-y-2 mt-4">
+                <div className="flex items-center gap-2">
+                <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                 ${product.price}
+                </span>
+                {product.originalPrice && (
+                <span className="text-gray-500 line-through text-lg">
+                ${product.originalPrice}
+                </span>
+                 )}
                 </div>
+                {product.originalPrice && (
+                <span className="text-green-400 text-sm font-semibold">
+                Save ${(product.originalPrice - product.price).toFixed(2)}
+                 </span>
+                 )}
+                <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => addToCart(product)}
+                disabled={!product.inStock}
+                className={`mt-4 px-6 py-3 rounded-xl font-semibold transition-all shadow-lg ${
+                product.inStock
+                ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 hover:shadow-purple-500/25'
+              : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                }`}
+                >
+                   Add to Cart
+               </motion.button>
+                     </div>
+                          </div>
 
                 {/* Hover Glow Effect */}
                 <AnimatePresence>

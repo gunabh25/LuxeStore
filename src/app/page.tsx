@@ -549,7 +549,7 @@ const ShoppingApp: React.FC = () => {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ delay: 0.1 }}
-                      className="inline-block px-3 py-1 bg-gradient-to-r from-orange-400 to-red-400 text-white text-xs font-bold rounded-full flex items-center gap-1"
+                      className="px-3 py-1 bg-gradient-to-r from-orange-400 to-red-400 text-white text-xs font-bold rounded-full flex items-center gap-1"
                     >
                       <TrendingUp size={12} />
                       TRENDING

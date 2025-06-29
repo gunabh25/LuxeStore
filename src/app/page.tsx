@@ -531,7 +531,7 @@ const ShoppingApp: React.FC = () => {
                 }}
                 onHoverStart={() => setHoveredProduct(product.id)}
                 onHoverEnd={() => setHoveredProduct(null)}
-                className="group relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-500"
+                className="group relative bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-500 flex flex-col justify-between"
               >
                 {/* Product Badges */}
                 <div className="absolute top-4 left-4 z-20 space-y-2">
@@ -626,7 +626,7 @@ const ShoppingApp: React.FC = () => {
                 </div>
 
                 {/* Product Info */}
-                <div className="p-6 space-y-4">
+                <div className="p-6 flex flex-col flex-grow space-y-4">
                   <div>
                     <h3 className="font-bold text-xl text-white mb-2 group-hover:text-purple-300 transition-colors">
                       {product.name}
@@ -657,49 +657,41 @@ const ShoppingApp: React.FC = () => {
                   </div>
 
                   {/* Price */}
-                <div className="flex flex-col items-center justify-center space-y-2 mt-4">
-                <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                 ${product.price}
-                </span>
-                {product.originalPrice && (
-                <span className="text-gray-500 line-through text-lg">
-                ${product.originalPrice}
-                </span>
-                 )}
+                  <div className="flex flex-col items-center justify-center space-y-2 mt-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                        ${product.price}
+                      </span>
+                      {product.originalPrice && (
+                        <span className="text-gray-500 line-through text-lg">
+                          ${product.originalPrice}
+                        </span>
+                      )}
+                    </div>
+                    {product.originalPrice && (
+                      <span className="text-green-400 text-sm font-semibold">
+                        Save ${(product.originalPrice - product.price).toFixed(2)}
+                      </span>
+                    )}
+                  </div>
                 </div>
-                {product.originalPrice && (
-                <span className="text-green-400 text-sm font-semibold">
-                Save ${(product.originalPrice - product.price).toFixed(2)}
-                 </span>
-                 )}
-                <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => addToCart(product)}
-                disabled={!product.inStock}
-                className={`mt-4 px-6 py-3 rounded-xl font-semibold transition-all shadow-lg ${
-                product.inStock
-                ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 hover:shadow-purple-500/25'
-              : 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                }`}
-                >
-                   Add to Cart
-               </motion.button>
-                     </div>
-                          </div>
 
-                {/* Hover Glow Effect */}
-                <AnimatePresence>
-                  {hoveredProduct === product.id && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-3xl pointer-events-none"
-                    />
-                  )}
-                </AnimatePresence>
+                {/* Add to Cart Button always at the bottom */}
+                <div className="p-6 pt-0 flex justify-center">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => addToCart(product)}
+                    disabled={!product.inStock}
+                    className={`w-full px-6 py-3 rounded-xl font-semibold transition-all shadow-lg ${
+                      product.inStock
+                        ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white hover:from-purple-600 hover:to-pink-600 hover:shadow-purple-500/25'
+                        : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                    }`}
+                  >
+                    Add to Cart
+                  </motion.button>
+                </div>
               </motion.div>
             ))}
           </AnimatePresence>

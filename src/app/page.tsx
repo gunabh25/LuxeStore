@@ -1,5 +1,4 @@
-// pages/index.tsx or app/page.tsx (depending on your Next.js version)
-'use client'; // Add this if using App Router
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';

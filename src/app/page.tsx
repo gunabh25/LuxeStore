@@ -413,7 +413,6 @@ const ShoppingApp: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-3 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-white/20 transition-all"
-                onClick={() => setShowAuthModal(true)}
               >
                 <User size={20} />
               </motion.button>

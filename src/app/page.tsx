@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import AuthComponent from '@/components/AuthComponent';
 import { motion, AnimatePresence, useScroll, useTransform, easeInOut } from 'framer-motion';
 import { 
   ShoppingCart, Plus, Minus, X, Heart, Star, 
@@ -234,7 +233,6 @@ const ShoppingApp: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
-  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const { scrollY } = useScroll();
   const headerOpacity = useTransform(scrollY, [0, 100], [1, 0.95]);
@@ -420,24 +418,7 @@ const ShoppingApp: React.FC = () => {
                 <User size={20} />
               </motion.button>
               
-              {/* Auth Modal */}
-              {showAuthModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center">
-                  <div 
-                    className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-                    onClick={() => setShowAuthModal(false)}
-                  />
-                  <div className="relative z-10 w-full max-w-md mx-4">
-                    <AuthComponent />
-                    <button
-                      onClick={() => setShowAuthModal(false)}
-                      className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl"
-                    >
-                      ✕
-                    </button>
-                  </div>
-                </div>
-              )}
+              
 
               <motion.button
                 whileHover={{ scale: 1.05 }}

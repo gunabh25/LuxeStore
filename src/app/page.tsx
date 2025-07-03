@@ -2,13 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import AuthComponent from '@/components/AuthComponent';
 import { motion, AnimatePresence, useScroll, useTransform, easeInOut } from 'framer-motion';
 import { 
   ShoppingCart, Plus, Minus, X, Heart, Star, 
-  Search, User, Zap, TrendingUp, Award, Eye
+  Search, User, Zap, TrendingUp, Eye, Award
 } from 'lucide-react';
 
-// Types
 interface Product {
   id: number;
   name: string;
@@ -137,6 +137,9 @@ const sampleProducts: Product[] = [
   }
 ];
 
+
+
+// Categories for filtering products
 const categories = ["All", "Electronics", "Fashion", "Home"];
 
 // Enhanced Animation variants
@@ -231,6 +234,7 @@ const ShoppingApp: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const { scrollY } = useScroll();
   const headerOpacity = useTransform(scrollY, [0, 100], [1, 0.95]);
@@ -339,7 +343,8 @@ const ShoppingApp: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black text-white relative overflow-x-hidden">
+    <>
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black text-white relative overflow-x-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -410,10 +415,30 @@ const ShoppingApp: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="p-3 bg-white/10 backdrop-blur-sm rounded-xl hover:bg-white/20 transition-all"
+                onClick={() => setShowAuthModal(true)}
               >
                 <User size={20} />
               </motion.button>
               
+              {/* Auth Modal */}
+              {showAuthModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center">
+                  <div 
+                    className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+                    onClick={() => setShowAuthModal(false)}
+                  />
+                  <div className="relative z-10 w-full max-w-md mx-4">
+                    <AuthComponent />
+                    <button
+                      onClick={() => setShowAuthModal(false)}
+                      className="absolute top-4 right-4 text-gray-400 hover:text-white text-xl"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+              )}
+
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -948,6 +973,7 @@ const ShoppingApp: React.FC = () => {
         </div>
       </motion.footer>
     </div>
+    </>
   );
 };
 
